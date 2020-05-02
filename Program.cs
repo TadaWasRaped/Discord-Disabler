@@ -23,7 +23,7 @@ namespace DiscordTerminatorV2
             Console.Title = "Discord Terminator V2";
             Console.WriteLine("Enter Token: ");
             string token = Console.ReadLine();
-            if (DisableAccount(token))  Console.WriteLine("Successfully disabled that account.");
+            if (DisableAccount(token)) Console.WriteLine("Successfully disabled that account.");
             else Console.WriteLine("An error occurred while disabling that account, are you sure it's a valid token?");
             Console.ReadLine();
         }
